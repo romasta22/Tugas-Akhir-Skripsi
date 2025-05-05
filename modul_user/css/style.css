@@ -1,0 +1,36 @@
+user_frontend/assets/css/style.css
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    background: #34495e;
+    padding: 10px;
+    text-align: center;
+}
+
+nav a {
+    color: #ecf0f1;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: #e74c3c;
+}
+
+h1 {
+    color: #2c3e50;
+    text-align: center;
+    margin-top: 20px;
+
+.carousel-inner img {
+        height: 500px; /* Atur tinggi gambar */
+        object-fit: cover; /* Memastikan gambar ter-crop dengan proporsional */
+        width: 100%; /* Pastikan lebar tetap 100% */
+    }
+}
