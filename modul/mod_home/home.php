@@ -80,62 +80,47 @@
     <style>.center-graph { display: flex; justify-content: center; align-items: center; height: 50vh;  width: 100%; } </style>
 
     <div class="row border mt-2">
-        <!-- untuk tabel pertama -->
-        <div class="col-md-6">
-            <table class="table table-sm table-bordered mt-2">
-                <thead>
-                    <tr>
-                    <th scope="col">No</th>
-                    <th scope="col">Wisata</th>
-                    <th scope="col">Kategori</th>
-                    <th scope="col">Lokasi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                        $query_wisata = mysqli_query($koneksi, "SELECT * FROM tbl_wisata, tbl_kategori WHERE tbl_wisata.id_kategori = tbl_kategori.id_kategori ORDER BY tbl_wisata.id_wisata DESC LIMIT 5");
-                        $no = 1;
-                        while($r=mysqli_fetch_array($query_wisata)) {
-                    ?>
-                        <tr>
-                            <td scope="row"><?php echo $no++ ?></td>
-                            <td><?php echo $r['nama_wisata']; ?></td>
-                            <td><?php echo $r['nama_kategori']; ?></td>
-                            <td><?php echo $r['lokasi_wisata']; ?></td>
-                        </tr>
-                    <?php
+        
+              
+                    <script>
+    // Pastikan elemen dengan id "grafikwisata" ada di halaman sebelum mencoba membuat grafik
+    if (document.getElementById("grafikwisata")) {
+        // Ambil data dari PHP (nama kategori dan total wisata)
+        var x = <?php echo json_encode($nama_kategori); ?>;
+        var y = <?php echo json_encode($total_wisata); ?>;
+        var warna_bar = [
+            "#0dcaf0", //blue
+            "#d63384", //pink
+            "#6610f2", //yellow
+            "#198754"  //green
+        ];
 
-                        }
-                    ?>
-               </tbody>
-            </table>
-        </div>
+        // Membuat grafik bar (OLAP) menggunakan Chart.js
+        new Chart("grafikwisata", {
+            type: "bar",  // Mengganti tipe grafik menjadi bar (OLAP-style)
+            data: {
+                labels: x,  // Menampilkan kategori wisata
+                datasets: [{
+                    backgroundColor: warna_bar,  // Warna untuk setiap kategori
+                    data: y  // Data yang akan ditampilkan
+                }]
+            },
+            options: {
+                responsive: true,  // Menjadikan grafik responsif
+                scales: {
+                    y: {
+                        beginAtZero: true  // Mulai sumbu Y dari nol
+                    }
+                },
+                title: {
+                    display: true,
+                    text: "Jumlah Data Wisata Berdasarkan Kategori"
+                }
+            }
+        });
+    }
+</script>
 
-        <!-- untuk tabel kedua -->
-        <div class="col-md-6">
-            <table class="table table-sm table-bordered mt-2">
-                <thead>
-                    <tr>
-                        <th scope="col">No</th>
-                        <th scope="col">Judul</th>
-                        <th scope="col">Penulis</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                        $query_berita = mysqli_query($koneksi, "SELECT * FROM tbl_berita, tbl_admin WHERE tbl_berita.id_admin_berita = tbl_admin.id_admin ORDER BY tbl_berita.id_berita DESC LIMIT 5");
-                        $no = 1;
-                        while($a=mysqli_fetch_array($query_berita)) {
-                    ?>
-                        <tr>
-                            <td scope="row"><?php echo $no++ ?></td>
-                            <td><?php echo $a['judul_berita']; ?></td>
-                            <td><?php echo $a['nama_admin']; ?></td>
-                        </tr>
-                    <?php
-
-                        }
-                    ?>
                </tbody>
             </table>
         </div>

@@ -337,34 +337,7 @@ date_default_timezone_set("Asia/Jakarta");
                     });
             })
             .draw();
-
-            // grafik  wisata 
-                var x = <?php echo json_encode($nama_kategori) ?>;
-                var y = <?php echo json_encode($total_wisata) ?>;
-                var warna_bar = [
-                "#0dcaf0", //blue
-                "#d63384", //pink
-                "#6610f2", //yellow
-                "#198754;" //green
-                
-                ];
-
-                new Chart("grafikwisata", {
-                type: "doughnut",
-                data: {
-                    labels: x,
-                    datasets: [{
-                    backgroundColor: warna_bar,
-                    data: y
-                    }]
-                },
-                options: {
-                    title: {
-                    display: true,
-                    text: "Jumlah Data Wisata Berdasarkan Kategori"
-                    }
-                }
-                });            
+               
      </script>
    </body>
  </html>
